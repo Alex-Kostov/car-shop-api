@@ -1,1 +1,4 @@
 /node_modules
+
+# Do not commit the .env file, it contains sensitive data
+/.env
