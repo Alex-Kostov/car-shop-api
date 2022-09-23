@@ -1,27 +1,28 @@
 const express = require('express');
-const mysql = require('mysql');
-
+const app = express();
 // Get the data from .env file (not in the repo).
 require('dotenv').config();
+const port = process.env.PORT || 4000;
 
-const app = express();
-const port = process.env.PORT;
+app.use(express.json());
 
-// Create connection
-const db = mysql.createConnection({
-	host: process.env.HOST,
-	user: process.env.USER,
-	password: process.env.PASSWORD,
-	database: 'car_shop_api'
+app.get('/', (req, res) => {
+	res.send('Hello World');
 });
 
-// Connect
-db.connect((err) => {
-	if (err) {
-		throw err;
-	}
-	console.log('MySql Connected...');
+const carsRoutes = require('./api/routes/cars.router');
+
+app.use('/api/cars', carsRoutes);
+
+// Listen for Request
+app.listen(port, () => {
+	console.log('Server is up on port ' + port);
 });
+
+/*
+
+// Database connection
+const dbConn = require("./api/config/db-config");
 
 // Create Database
 app.get('/create_database', (req, res) => {
@@ -112,6 +113,4 @@ app.get('/delete_car/:id', (req, res) => {
 	});
 });
 
-app.listen(port, () => {
-	console.log('Server is up on port ' + port);
-});
+*/
