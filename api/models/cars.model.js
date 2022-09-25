@@ -3,16 +3,16 @@ const dbConn = require('../config/db-config');
 // Constructor
 const Cars = function (car) {
 	this.make = car.make;
-	this.model = car.make;
+	this.model = car.model;
 	this.year = car.year;
 	this.price = car.price;
 	this.transmission = car.transmission;
-	this.engineType = car.engineType;
+	this.engine_type = car.engine_type;
 	this.type = car.type;
 }
 
 Cars.create = (car, result) => {
-  dbConn.query("Insert into cars set ?", car, (err, res) => {
+  dbConn.query(`Insert into ${globalDbName}.${globalTableName} set ?`, car, (err, res) => {
     if (err) {
       result(err);
     } else {
@@ -22,7 +22,7 @@ Cars.create = (car, result) => {
 };
 
 Cars.getAll = (result) => {
-	dbConn.query("Select * From cars", (error, results, fields) => {
+	dbConn.query(`Select * From ${globalDbName}.${globalTableName}`, (error, results, fields) => {
 		if (error) {
 			result(error);
 		} else {

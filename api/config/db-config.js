@@ -10,6 +10,10 @@ const db = mysql.createConnection({
 	multipleStatements: true
 });
 
+// Defining globals that we use in the models.
+global.globalDbName = process.env.DB_DATABASE;
+global.globalTableName = 'cars';
+
 // Connect
 db.connect((err) => {
 	if (err) {

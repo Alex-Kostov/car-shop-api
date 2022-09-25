@@ -5,11 +5,11 @@ exports.create = (req, res) => {
 	console.log("body", req.body);
 	const newCar = new Cars({
 		make: req.body.make,
-		model: req.body.make,
+		model: req.body.model,
 		year: req.body.year,
 		price: req.body.price,
 		transmission: req.body.transmission,
-		engineType: req.body.engineType,
+		engine_type: req.body.engine_type,
 		type: req.body.type
 	});
 
