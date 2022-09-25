@@ -1,4 +1,5 @@
 const mysql = require("mysql");
+const { createDatabase, createTables, addTestCar } = require('./db-create-tables');
 require('dotenv').config();
 
 // Create connection
@@ -6,7 +7,6 @@ const db = mysql.createConnection({
 	host: process.env.DB_HOST,
 	user: process.env.DB_USER,
 	password: process.env.DB_PASSWORD,
-	database: process.env.DB_DATABASE,
 	multipleStatements: true
 });
 
@@ -16,7 +16,14 @@ db.connect((err) => {
 		console.log('Connection Failed');
 		throw err;
 	}
+
+	// Create Database, Table and add a test car
+	createDatabase(process.env.DB_DATABASE, db);
+	createTables(process.env.DB_DATABASE, 'cars', db);
+	addTestCar(process.env.DB_DATABASE, 'cars', db);
+
 	console.log('MySql Connected...');
+
 });
 
 module.exports = db;

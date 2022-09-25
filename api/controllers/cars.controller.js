@@ -3,7 +3,7 @@ const Cars = require("../models/cars.model");
 
 exports.create = (req, res) => {
 	console.log("body", req.body);
-	const newCar = new Car({
+	const newCar = new Cars({
 		make: req.body.make,
 		model: req.body.make,
 		year: req.body.year,

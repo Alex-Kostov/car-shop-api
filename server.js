@@ -21,49 +21,6 @@ app.listen(port, () => {
 
 /*
 
-// Database connection
-const dbConn = require("./api/config/db-config");
-
-// Create Database
-app.get('/create_database', (req, res) => {
-	const sql = 'CREATE DATABASE car_shop_api';
-	db.query(sql, (err, result) => {
-		if (err) {
-			throw err;
-		}
-		console.log(result);
-		res.status(200).send('Database created...');
-	});
-});
-
-// Create table
-app.get('/create_table_cars', (req, res) => {
-	const sql = 'CREATE TABLE cars(id int AUTO_INCREMENT, make VARCHAR(255), model VARCHAR(255), PRIMARY KEY (id))';
-	db.query(sql, (err, result) => {
-		if (err) {
-			throw err;
-		}
-		console.log(result);
-		res.status(200).send('Cars table created...');
-	});
-})
-
-// Insert test car
-app.get('/add_test_car', (req, res) => {
-	const car = {
-		make: 'Audi',
-		model: 'A3',
-	};
-	const sql = 'INSERT INTO cars SET ?';
-	const query = db.query(sql, car, (err, result) => {
-		if (err) {
-			throw err;
-		}
-		console.log(result);
-		res.status(200).send('Test Car added');
-	});
-});
-
 // Select cars
 app.get('/get_cars', (req, res) => {
 	const sql = 'SELECT * FROM cars';
