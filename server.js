@@ -20,31 +20,6 @@ app.listen(port, () => {
 });
 
 /*
-
-// Select cars
-app.get('/get_cars', (req, res) => {
-	const sql = 'SELECT * FROM cars';
-	const query = db.query(sql, (err, results) => {
-		if (err) {
-			throw err;
-		}
-		console.log(results);
-		res.status(200).send('Cars fetched...');
-	});
-});
-
-// Select car by ID
-app.get('/get_car/:id', (req, res) => {
-	const sql = 'SELECT * FROM cars WHERE id = ' + req.params.id;
-	const query = db.query(sql, (err, results) => {
-		if (err) {
-			throw err;
-		}
-		console.log(results);
-		res.status(200).send('Car fetched...');
-	});
-});
-
 // Update car
 app.get('/update_car/:id', (req, res) => {
 	const newModel = 'a5';

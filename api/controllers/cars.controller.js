@@ -37,4 +37,18 @@ exports.getAll = (req, res) => {
 			data: response
 		});
 	});
-}
+};
+
+exports.getCarById = (req, res) => {
+	const { id } = req.params;
+	Cars.getCarById(id, (err, response) => {
+		if (err) {
+			res.send(err);
+		}
+
+		res.json({
+			error: false,
+			date: response
+		})
+	});
+};

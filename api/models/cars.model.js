@@ -1,4 +1,4 @@
-const dbConn = require('../config/db-config');
+const db = require('../config/db-config');
 
 // Constructor
 const Cars = function (car) {
@@ -12,7 +12,7 @@ const Cars = function (car) {
 }
 
 Cars.create = (car, result) => {
-  dbConn.query(`Insert into ${globalDbName}.${globalTableName} set ?`, car, (err, res) => {
+  db.query(`Insert into ${globalDbName}.${globalTableName} set ?`, car, (err, res) => {
     if (err) {
       result(err);
     } else {
@@ -22,13 +22,24 @@ Cars.create = (car, result) => {
 };
 
 Cars.getAll = (result) => {
-	dbConn.query(`Select * From ${globalDbName}.${globalTableName}`, (error, results, fields) => {
+	db.query(`Select * From ${globalDbName}.${globalTableName}`, (error, res, fields) => {
 		if (error) {
 			result(error);
 		} else {
-			result(null, results);
+			result(null, res);
 		}
 	});
-}
+};
+
+Cars.getCarById = (id, result) => {
+	const sql = `SELECT * FROM ${globalDbName}.${globalTableName} WHERE id = ${id}`
+	db.query(sql, (error, res, fields) => {
+		if (error) {
+			result(error);
+		} else {
+			result(null, res);
+		}
+	});
+};
 
 module.exports = Cars;
