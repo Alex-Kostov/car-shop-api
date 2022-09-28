@@ -33,16 +33,6 @@ app.get('/update_car/:id', (req, res) => {
 	});
 });
 
-// Delete car
-app.get('/delete_car/:id', (req, res) => {
-	const sql = 'DELETE FROM cars WHERE id = ' + req.params.id;
-	const query = db.query(sql, (err, results) => {
-		if (err) {
-			throw err;
-		}
-		console.log(results);
-		res.status(200).send('Car deleted...');
-	});
-});
+
 
 */

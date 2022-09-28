@@ -12,13 +12,13 @@ const Cars = function (car) {
 }
 
 Cars.create = (car, result) => {
-  db.query(`Insert into ${globalDbName}.${globalTableName} set ?`, car, (err, res) => {
-    if (err) {
-      result(err);
-    } else {
-      result(null, res);
-    }
-  });
+	db.query(`Insert into ${globalDbName}.${globalTableName} set ?`, car, (err, res) => {
+		if (err) {
+			result(err);
+		} else {
+			result(null, res);
+		}
+	});
 };
 
 Cars.getAll = (result) => {
@@ -33,6 +33,17 @@ Cars.getAll = (result) => {
 
 Cars.getCarById = (id, result) => {
 	const sql = `SELECT * FROM ${globalDbName}.${globalTableName} WHERE id = ${id}`
+	db.query(sql, (error, res, fields) => {
+		if (error) {
+			result(error);
+		} else {
+			result(null, res);
+		}
+	});
+};
+
+Cars.deleteById = (id, result) => {
+	const sql = `DELETE FROM ${globalDbName}.${globalTableName} WHERE id = ${id}`;
 	db.query(sql, (error, res, fields) => {
 		if (error) {
 			result(error);

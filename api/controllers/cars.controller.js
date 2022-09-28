@@ -52,3 +52,18 @@ exports.getCarById = (req, res) => {
 		})
 	});
 };
+
+exports.deleteById = (req, res) => {
+	const { id } = req.params;
+	Cars.deleteById(id, (err, response) => {
+		if (err) {
+			res.send(err);
+		}
+
+		res.json({
+			error: false,
+			message: 'Car Deleted Successfully',
+			data: response
+		});
+	});
+};
