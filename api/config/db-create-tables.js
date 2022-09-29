@@ -10,7 +10,7 @@ exports.createDatabase = (db_name, db) => {
 		if (err) {
 			throw err;
 		}
-		console.log('Database Created...');
+		console.log('Database OK');
 	});
 }
 
@@ -37,7 +37,7 @@ exports.createTables = (db_name, tableName, db) => {
 		if (err) {
 			throw err;
 		}
-		console.log(tableName + ' table created...');
+		console.log(tableName + ' table OK');
 	});
 }
 

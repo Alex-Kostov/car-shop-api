@@ -1,4 +1,4 @@
-const mysql = require("mysql");
+const mysql = require("mysql2");
 const { createDatabase, createTables, addTestCar } = require('./db-create-tables');
 require('dotenv').config();
 
@@ -14,20 +14,11 @@ const db = mysql.createConnection({
 global.globalDbName = process.env.DB_DATABASE;
 global.globalTableName = 'cars';
 
-// Connect
-db.connect((err) => {
-	if (err) {
-		console.log('Connection Failed');
-		throw err;
-	}
+// Create Database, Table and add a test car
+createDatabase(process.env.DB_DATABASE, db);
+createTables(process.env.DB_DATABASE, 'cars', db);
+addTestCar(process.env.DB_DATABASE, 'cars', db);
 
-	// Create Database, Table and add a test car
-	createDatabase(process.env.DB_DATABASE, db);
-	createTables(process.env.DB_DATABASE, 'cars', db);
-	addTestCar(process.env.DB_DATABASE, 'cars', db);
-
-	console.log('MySql Connected...');
-
-});
+console.log('MySql Connected...');
 
 module.exports = db;
