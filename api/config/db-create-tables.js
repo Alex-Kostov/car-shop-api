@@ -5,7 +5,7 @@
  * @param {*} db Database connection.
  */
 exports.createDatabase = (db_name, db) => {
-	const sql = 'CREATE DATABASE IF NOT EXISTS ' + db_name;
+	const sql = `CREATE DATABASE IF NOT EXISTS ${db_name}; USE ${db_name};`;
 	db.query(sql, (err, result) => {
 		if (err) {
 			throw err;
@@ -15,14 +15,12 @@ exports.createDatabase = (db_name, db) => {
 }
 
 /**
- * Creates Table in the database that is passed
+ * Creates table cars in the database
  * If the table exist nothing happens
- * @param {string} db_name Name of the database
- * @param {*} tableName Name of the table
  * @param {*} db Database connection
  */
-exports.createTables = (db_name, tableName, db) => {
-	const sql = `CREATE TABLE IF NOT EXISTS ${db_name}.${tableName}(
+exports.createTables = (db) => {
+	const sql = `CREATE TABLE IF NOT EXISTS cars(
 		id int AUTO_INCREMENT,
 		make CHAR(255),
 		model CHAR(255),
@@ -37,19 +35,17 @@ exports.createTables = (db_name, tableName, db) => {
 		if (err) {
 			throw err;
 		}
-		console.log(tableName + ' table OK');
+		console.log('cars table OK');
 	});
 }
 
 /**
- * Ads one test car into the passed table
+ * Ads one test car into the cars table
  * If the table has cars the function does nothing
- * @param {*} db_name Database Name
- * @param {*} tableName Table Name
  * @param {*} db Database connection
  */
-exports.addTestCar = (db_name, tableName, db) => {
-	db.query(`SELECT EXISTS (SELECT 1 FROM ${db_name}.${tableName});`, (err, result, fields) => {
+exports.addTestCar = (db) => {
+	db.query(`SELECT EXISTS (SELECT 1 FROM cars);`, (err, result, fields) => {
 		if (err) {
 			throw err;
 		}
@@ -65,7 +61,7 @@ exports.addTestCar = (db_name, tableName, db) => {
 				engine_type: 'diesel',
 				type: 'hatchback'
 			};
-			const sql = `INSERT INTO ${db_name}.${tableName} SET ?`;
+			const sql = `INSERT INTO cars SET ?`;
 			db.query(sql, car, (err, result) => {
 				if (err) {
 					throw err;

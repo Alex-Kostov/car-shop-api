@@ -12,7 +12,7 @@ const Cars = function (car) {
 }
 
 Cars.create = (car, result) => {
-	db.query(`Insert into ${globalDbName}.${globalTableName} set ?`, car, (err, res) => {
+	db.query('Insert into cars set ?', car, (err, res) => {
 		if (err) {
 			result(err);
 		} else {
@@ -22,7 +22,7 @@ Cars.create = (car, result) => {
 };
 
 Cars.getAll = (result) => {
-	db.query(`Select * From ${globalDbName}.${globalTableName}`, (error, res, fields) => {
+	db.query('Select * From cars', (error, res, fields) => {
 		if (error) {
 			result(error);
 		} else {
@@ -32,8 +32,7 @@ Cars.getAll = (result) => {
 };
 
 Cars.getCarById = (id, result) => {
-	const sql = `SELECT * FROM ${globalDbName}.${globalTableName} WHERE id = ${id}`
-	db.query(sql, (error, res, fields) => {
+	db.query('SELECT * FROM cars WHERE id=?', id, (error, res, fields) => {
 		if (error) {
 			result(error);
 		} else {
@@ -43,8 +42,7 @@ Cars.getCarById = (id, result) => {
 };
 
 Cars.deleteById = (id, result) => {
-	const sql = `DELETE FROM ${globalDbName}.${globalTableName} WHERE id = ${id}`;
-	db.query(sql, (error, res, fields) => {
+	db.query('DELETE FROM cars WHERE id=?', id, (error, res, fields) => {
 		if (error) {
 			result(error);
 		} else {
@@ -56,8 +54,8 @@ Cars.deleteById = (id, result) => {
 Cars.update = (id, car, result) => {
 	const { make, model, year, price, transmission, engine_type, type } = car;
 	db.query(
-		'UPDATE ?.? SET make = ?, model = ?, year = ?, price = ?, transmission = ?, engine_type = ?, type = ? WHERE id = ?',
-		[globalDbName, globalTableName, make, model, year, price, transmission, engine_type, type, id],
+		'UPDATE cars SET make=?, model=?, year=?, price=?, transmission=?, engine_type=?, type=? WHERE id=?',
+		[ make, model, year, price, transmission, engine_type, type, id],
 		(err, res) => {
 			if (err) {
 				result(err);

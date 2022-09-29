@@ -10,14 +10,14 @@ const db = mysql.createConnection({
 	multipleStatements: true
 });
 
-// Defining globals that we use in the models.
-global.globalDbName = process.env.DB_DATABASE;
-global.globalTableName = 'cars';
-
+try{
 // Create Database, Table and add a test car
 createDatabase(process.env.DB_DATABASE, db);
-createTables(process.env.DB_DATABASE, 'cars', db);
-addTestCar(process.env.DB_DATABASE, 'cars', db);
+createTables(db);
+addTestCar(db);
+} catch(err) {
+	throw(err);
+}
 
 console.log('MySql Connected...');
 
