@@ -53,4 +53,19 @@ Cars.deleteById = (id, result) => {
 	});
 };
 
+Cars.update = (id, car, result) => {
+	const { make, model, year, price, transmission, engine_type, type } = car;
+	db.query(
+		'UPDATE ?.? SET make = ?, model = ?, year = ?, price = ?, transmission = ?, engine_type = ?, type = ? WHERE id = ?',
+		[globalDbName, globalTableName, make, model, year, price, transmission, engine_type, type, id],
+		(err, res) => {
+			if (err) {
+				result(err);
+			} else {
+				result(null, res);
+			}
+		}
+	)
+};
+
 module.exports = Cars;

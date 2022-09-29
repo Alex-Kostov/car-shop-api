@@ -67,3 +67,26 @@ exports.deleteById = (req, res) => {
 		});
 	});
 };
+
+exports.update = (req, res) => {
+	const { id } = req.params;
+	const updatedCarData = new Cars({
+		make: req.body.make,
+		model: req.body.model,
+		year: req.body.year,
+		price: req.body.price,
+		transmission: req.body.transmission,
+		engine_type: req.body.engine_type,
+		type: req.body.type
+	});
+	Cars.update(id, updatedCarData, (err, response) => {
+		if (err) {
+			res.send(err);
+		}
+		res.json({
+			error: false,
+			message: 'Car updated successfully.',
+			data: response
+		});
+	});
+};

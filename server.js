@@ -18,21 +18,3 @@ app.use('/api/cars', carsRoutes);
 app.listen(port, () => {
 	console.log('Server is up on port ' + port);
 });
-
-/*
-// Update car
-app.get('/update_car/:id', (req, res) => {
-	const newModel = 'a5';
-	const sql = `UPDATE cars SET model = '${newModel}' WHERE id = ${req.params.id}`;
-	const query = db.query(sql, (err, results) => {
-		if (err) {
-			throw err;
-		}
-		console.log(results);
-		res.status(200).send('Car updated...');
-	});
-});
-
-
-
-*/
