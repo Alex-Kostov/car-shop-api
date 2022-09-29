@@ -1,6 +1,9 @@
 const { response } = require('express');
 const Cars = require('../models/cars.model');
 
+/**
+ * Creates new Car.
+ */
 exports.create = (req, res) => {
 	console.log('body', req.body);
 	const newCar = new Cars({
@@ -26,6 +29,9 @@ exports.create = (req, res) => {
 	});
 };
 
+/**
+ * Returns All the published cars.
+ */
 exports.getAll = (req, res) => {
 	Cars.getAll((err, response) => {
 		if (err) {
@@ -39,6 +45,10 @@ exports.getAll = (req, res) => {
 	});
 };
 
+
+/**
+ * Returns Car by passed id.
+ */
 exports.getCarById = (req, res) => {
 	const { id } = req.params;
 	Cars.getCarById(id, (err, response) => {
@@ -53,6 +63,9 @@ exports.getCarById = (req, res) => {
 	});
 };
 
+/**
+ * Delete car by passed id.
+ */
 exports.deleteById = (req, res) => {
 	const { id } = req.params;
 	Cars.deleteById(id, (err, response) => {
@@ -68,6 +81,9 @@ exports.deleteById = (req, res) => {
 	});
 };
 
+/**
+ * Update car by id.
+ */
 exports.update = (req, res) => {
 	const { id } = req.params;
 	const updatedCarData = new Cars({

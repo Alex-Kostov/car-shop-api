@@ -10,13 +10,13 @@ const db = mysql.createConnection({
 	multipleStatements: true
 });
 
-try{
-// Create Database, Table and add a test car
-createDatabase(process.env.DB_DATABASE, db);
-createTables(db);
-addTestCar(db);
-} catch(err) {
-	throw(err);
+try {
+	// Create Database, Table and add a test car
+	createDatabase(process.env.DB_DATABASE, db);
+	createTables(db);
+	addTestCar(db);
+} catch (err) {
+	throw (err);
 }
 
 console.log('MySql Connected...');
